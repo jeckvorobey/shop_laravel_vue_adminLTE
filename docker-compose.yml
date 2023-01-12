@@ -1,36 +1,36 @@
-version: '3'
-
+version: "3.5"
 services:
-  nginx:
-    image: nginx:latest
+  shop:
+    container_name: shop
+    image: webdevops/php-apache:8.0
     volumes:
-      - ./:/var/www
-      - ./_docker/nginx/conf.d:/etc/nginx/conf.d
-    ports:
-      - 8876:80
-    depends_on:
-      - app
-    container_name: shop_nginx
-
-  app:
-    build:
-      context: .
-      dockerfile: _docker/app/Dockerfile
-    volumes:
-      - ./:/var/www
-    container_name: shop_app
+      - "./:/app"
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public/
     depends_on:
       - db
+    networks:
+      cloud_net:
+        ipv4_address: 172.21.3.10
 
   db:
-    image: mysql:8.0
-    restart: always
+    container_name: db
+    image: mysql
     volumes:
-      - ./tmp/db:/var/lib/mysql
+      - "./mysql/shop:/var/lib/mysql"
     environment:
-        MYSQL_DATABASE: shop
-        MYSQL_ROOT_PASSWORD: root
-    ports:
-      - 8101:3306
-    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
-    container_name: shop_db
+      MYSQL_DATABASE: shop
+      MYSQL_USER: shop
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      cloud_net:
+        ipv4_address: 172.21.3.20
+
+networks:
+  cloud_net:
+    name: dev_net
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.21.3.0/24
