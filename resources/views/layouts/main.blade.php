@@ -138,13 +138,13 @@
             data-accordion="false">
 
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="/" class="nav-link">
               <i class="nav-icon fas fa-shopping-bag"></i>
               <p>Заказы</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="/" class="nav-link">
               <i class="nav-icon fas fa-tshirt"></i>
               <p>Продукты</p>
             </a>
@@ -168,7 +168,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="{{ route('user.index') }}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>Пользователи</p>
             </a>
