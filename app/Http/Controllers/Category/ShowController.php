@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class ShowController extends Controller
 {
-    public function __invoke(Category $category)
+    public function __invoke(Category $category): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-      return view('category.show', compact(['category',$category]));
+      return view('category.show', compact('category'));
     }
 }
