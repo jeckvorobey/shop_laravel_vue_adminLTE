@@ -144,7 +144,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/" class="nav-link">
+            <a href="{{ route('product.index') }}" class="nav-link">
               <i class="nav-icon fas fa-tshirt"></i>
               <p>Продукты</p>
             </a>
