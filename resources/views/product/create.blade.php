@@ -23,37 +23,65 @@
     <div class="container-fluid">
       <!-- Small boxes (Stat box) -->
       <div class="row">
-        <form  action="{{ route('product.store') }}" method="post">
+        <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
           @csrf
 
           <div class="form-group">
-            <label>
-              <input type="text" name="title" class="form-control" placeholder="наименование">
-            </label>
+            <input type="text" name="title" class="form-control" placeholder="Наименование">
           </div>
 
           <div class="form-group">
-            <label>
-              <input type="text" name="description" class="form-control" placeholder="Описание продукта">
-            </label>
+            <input type="text" name="description" class="form-control" placeholder="Описание продукта">
           </div>
 
           <div class="form-group">
-            <label>
-              <textarea name="content" class="form-control" cols="22" rows="10" placeholder="Контент"></textarea>
-            </label>
+            <textarea name="content" class="form-control" cols="22" rows="10" placeholder="Контент"></textarea>
           </div>
 
           <div class="form-group">
-            <label>
-              <input type="text" name="price" class="form-control" placeholder="цена">
-            </label>
+            <input type="text" name="price" class="form-control" placeholder="Цена">
           </div>
 
           <div class="form-group">
-            <label>
-              <input type="text" name="count" class="form-control" placeholder="количество">
-            </label>
+            <input type="text" name="count" class="form-control" placeholder="Количество">
+          </div>
+
+          <div class="form-group">
+            <select class="category_id" style="width: 100%;" data-placeholder="Выберете категорию" name="category">
+              <option selected disabled></option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->title }}</option>
+            @endforeach
+            </select>
+          </div>
+
+          <div class="form-group">
+            <select class="tags" multiple="multiple" data-placeholder="Выберете тег" style="width: 100%;" name="tags[]">
+              @foreach($tags as $tag)
+                <option  value="{{ $tag->id }}">{{ $tag->title }}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="form-group">
+            <select class="colors" multiple="multiple" data-placeholder="Выберете цвет" style="width: 100%;"
+                    name="colors[]">
+              @foreach($colors as $color)
+                <option style="color: {{ '#' . $color->title }}" value="{{ $color->id }}">{{ $color->title }}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="form-group">
+            <div class="input-group">
+              <div class="custom-file">
+                <input type="file" name="preview_image" class="custom-file-input" id="exampleInputFile">
+                <label class="custom-file-label" for="exampleInputFile">Выберете фото</label>
+              </div>
+              <div class="input-group-append">
+                <span class="input-group-text">Загрузка</span>
+              </div>
+            </div>
           </div>
 
           <div class="form-group">
